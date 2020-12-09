@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier - la Boutique Francaise{% endblock %}
+
+{% block content %}
+{% if cart|length >0 %}
+<h1>Mon Panier</h1>
+Decouvrez l'ensemble de vos articles de votre panier !!!
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">produit</th>
+      <th scope="col"></th>
+      <th scope="col">Quantite</th>
+      <th scope="col">Prix</th>
+      <th scope="col">Total</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% set total=null %}
+  {% for product in cart %}
+    <tr>
+    <th>
+    <img src="/uploads/{{product.product.illustration}}" alt="{{product.product.name}}" height="70px"><br>
+    </th>
+      <td>
+     {{product.product.name}}<br>
+      <small>{{product.product.subtitle}}</samll>
+      </td>
+      <td>
+      <a href="{{path('decrease_to_cart',{'id':product.product.id })}}">
+      <img src="{{asset('assets/img/remove.png')}}" alt="Retirez un produit" height="10px">
+      </a>
+      x{{product.quantity}}
+      <a href="{{path('add_to_cart',{'id':product.product.id })}}">
+      <img src="{{asset('assets/img/plus.png')}}" alt="Ajouter un produit" height="10px">
+      </a>
+      </td>
+      <td>{{(product.product.price/100)|number_format(2,',','.')}} €</td>
+      <td>{{((product.product.price * product.quantity)/100 )|number_format(2,',','.')}} €</td>
+      <td>
+      <a href="{{path('delete_to_cart',{'id':product.product.id})}}">
+      <img src="{{asset('assets/img/bin.png')}}" alt="Supprimez mon produit" height="20px">
+      </a>
+      </td>
+    </tr>
+    {% set total= total + (product.product.price * product.quantity) %}
+  {% endfor %}
+  </tbody>
+</table>
+<div class="text-right mb-5">
+<b>Nombre de produits : </b>{{cart | length}}</br>
+<b>Total panier : </b>{{ (total/100)|number_format(2,',','.')}} €
+<a href="" class="btn btn-success btn-block mt-2">Validez mon panier</a>
+</div>
+{% else%}
+<hr>
+<p><b>Votre panier est vide pensez à ajouter des articles</p><br>
+<div class="btn btn-block btn-info"><a href="{{path('products')}}"><b>retour aux produits</a></div>
+{% endif%}
+{% endblock %}

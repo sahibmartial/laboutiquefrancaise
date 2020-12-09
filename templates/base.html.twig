@@ -57,12 +57,15 @@
             <div class="navbar-item-custom">
                  {% if app.user %}
                 <a href="{{path('account')}}">Mon Compte<small>({{app.user.firstname}})</small> </a>  | <a href="{{path('app_logout')}}"> Deconnexion</a>
-            {% else %} 
+            {% else %}
                 <a href="{{path('register')}}">Inscription</a>  | <a href="{{path('app_login')}}">Connexion</a>
-            {% endif %}   
+            {% endif %}
 
             </div>
-           
+            <a href="{{path('cart')}}">
+             <img src="{{asset('assets/img/shopping-cart.png')}}" alt="Mon panier" class="cart-icon">
+             </a>
+
             <!--<form class="form-inline mt-2 mt-md-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Votre recherche" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
@@ -121,7 +124,7 @@
         </a>
     </div>
     {% endif %}
-  
+
 
 
     <!-- Marketing messaging and featurettes
