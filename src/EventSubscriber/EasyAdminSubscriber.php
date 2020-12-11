@@ -39,10 +39,12 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     function uploadIllustration($event)
     {
         $entity=$event->getEntityInstance();
+
+        //dd($entity);
          //$tmp_name=$_FILES['Product']['tmp_name']['illustration']['file'];//obtention chelin temporaire
         $tmpname=$_FILES['Product']['tmp_name']['illustration']['file'];
 
-        $tmp_name=$entity->getIllustration();//nom du fichier
+       // $tmp_name=$entity->getIllustration();//nom du fichier
         
         
         $filename =uniqid();//genere id uniq de mon image
@@ -68,7 +70,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     public function updateIllustration(BeforeEntityUpdatedEvent $event)
     {
-        if(($event->getEntityInstance() instanceof Product)){
+        //dd('hello');
+        if(!($event->getEntityInstance() instanceof Product)){
         	return;
         }
         
@@ -82,7 +85,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     public function setIllustration(BeforeEntityPersistedEvent $event)
     {
-    	 if(($event->getEntityInstance() instanceof Product)){
+       // dd('here');
+    	 if(!($event->getEntityInstance() instanceof Product)){
         	return;
         }
 

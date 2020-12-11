@@ -5,11 +5,11 @@
 {% block content %}
 <hr>
 <h1>Mon compte</h1>
-Bienvenue {{app.user.firstname}} dans votre espace de compte <br>
+Bienvenue <b>{{app.user.firstname}}</b> dans votre espace de compte <br>
 Profitez bien ....<br>
 <hr>
 -<a href="{{path('account_password')}}">modifier mot de passe</a> <br>
--ajouter adresses<br>
+-<a href="{{path('account_address')}}">Gerer mes addresses</a> <br>
 -Mes commandes<br>
 <hr>
 {% endblock %}
